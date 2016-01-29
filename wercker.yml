@@ -9,21 +9,17 @@ dev:
     # Statically build the project
     - script:
         name: go build
-        code: go build -o app    .
+        code: CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags="-s" -o app .
 
     # Copy binary to a location that gets passed along to the deploy pipeline
     - script:
         name: copy binary
         code: cp app "$WERCKER_OUTPUT_DIR"
 
-    - script:
-        name: make executable
-        code: chmod +x /pipeline/source/app
-
     - internal/docker-scratch-push:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
-        cmd: ./pipeline/source/app
+        cmd: ./app
         tag: $WERCKER_GIT_COMMIT
         ports: "8080"
         repository: advincze/ecswh
@@ -39,7 +35,7 @@ build:
     # Statically build the project
     - script:
         name: go build
-        code: go build -o app .
+        code: CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags="-s" -o app .
 
     # Copy binary to a location that gets passed along to the deploy pipeline
     - script:
@@ -48,14 +44,11 @@ build:
 deploy:
     box: golang
     steps:
-    - script:
-        name: make executable
-        code: chmod +x /pipeline/source/app
      # Use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
-        cmd: ./pipeline/source/app
+        cmd: ./app
         tag: $WERCKER_GIT_COMMIT
         ports: "8080"
         repository: advincze/ecswh
