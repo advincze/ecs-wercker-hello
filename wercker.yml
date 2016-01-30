@@ -9,13 +9,17 @@ dev:
     # Statically build the project
     - script:
         name: go build
-        code: CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags="-s" -o app .
+        code: CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags="-s" -o "$WERCKER_OUTPUT_DIR/app" .
 
     # Copy binary to a location that gets passed along to the deploy pipeline
-    - script:
-        name: copy binary
-        code: cp app "$WERCKER_OUTPUT_DIR"
+    # - script:
+    #     name: copy binary
+    #     code: cp app "$WERCKER_OUTPUT_DIR"
 
+    # - internal/shell
+
+    # - internal/store-container:
+    #     repository: advincze/foo
     - internal/docker-scratch-push:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
@@ -41,15 +45,28 @@ build:
     - script:
         name: copy binary
         code: cp app "$WERCKER_OUTPUT_DIR"
+    - script:
+        name: copy binary
+        code: cp app "$WERCKER_OUTPUT_DIR"
 deploy:
     box: golang
-    steps:
+    dockerhub:
      # Use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
         cmd: ./app
-        tag: $WERCKER_GIT_COMMIT
+        # tag: $WERCKER_GIT_COMMIT
         ports: "8080"
         repository: advincze/ecswh
         registry: https://registry.hub.docker.com
+
+    aws-ecs:
+    - tonnu/aws-ecs:
+      key: $AWS_ACCESS_KEY
+      secret: $AWS_SECRET_KEY
+      region: eu-west-1
+      cluster-name: uptown
+      task-definition-name: ecswh
+      task-definition-file: taskdef.json
+      minimum-running-tasks: 1

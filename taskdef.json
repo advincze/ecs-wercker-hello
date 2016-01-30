@@ -1,0 +1,43 @@
+{
+  "requiresAttributes": [],
+  "taskDefinitionArn": "arn:aws:ecs:eu-west-1:933782373565:task-definition/ecswh:1",
+  "status": "ACTIVE",
+  "revision": 1,
+  "containerDefinitions": [
+    {
+      "volumesFrom": [],
+      "memory": 64,
+      "extraHosts": null,
+      "dnsServers": null,
+      "disableNetworking": null,
+      "dnsSearchDomains": null,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "hostname": null,
+      "essential": true,
+      "entryPoint": null,
+      "mountPoints": [],
+      "name": "server",
+      "ulimits": null,
+      "dockerSecurityOptions": null,
+      "environment": [],
+      "links": null,
+      "workingDirectory": null,
+      "readonlyRootFilesystem": null,
+      "image": "advincze/ecswh:latest",
+      "command": null,
+      "user": null,
+      "dockerLabels": null,
+      "logConfiguration": null,
+      "cpu": 0,
+      "privileged": null
+    }
+  ],
+  "volumes": [],
+  "family": "ecswh"
+}
