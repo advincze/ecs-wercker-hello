@@ -1,8 +1,8 @@
 {
   "requiresAttributes": [],
-  "taskDefinitionArn": "arn:aws:ecs:eu-west-1:933782373565:task-definition/ecswh:1",
+  "taskDefinitionArn": "arn:aws:ecs:eu-west-1:933782373565:task-definition/ecswh:2",
   "status": "ACTIVE",
-  "revision": 1,
+  "revision": 2,
   "containerDefinitions": [
     {
       "volumesFrom": [],
@@ -34,7 +34,7 @@
       "user": null,
       "dockerLabels": null,
       "logConfiguration": null,
-      "cpu": 0,
+      "cpu": 1,
       "privileged": null
     }
   ],
