@@ -66,6 +66,7 @@ deploy:
       key: $AWS_ACCESS_KEY
       secret: $AWS_SECRET_KEY
       region: eu-west-1
+      service-name: foobar
       cluster-name: uptown
       task-definition-name: ecswh
       task-definition-file: taskdef.json
