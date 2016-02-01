@@ -13,7 +13,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "version 3")
+		fmt.Fprint(w, "version 4")
 	})
 	log.Println("start serving on port 8080")
 	http.ListenAndServe(":8080", nil)
