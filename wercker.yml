@@ -48,7 +48,7 @@ build:
 
 deploy:
     box: python:2.7-slim
-    dockerhub:
+    dockerhub-ecs:
      # Use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
         username: $DOCKERHUB_USERNAME
@@ -59,7 +59,6 @@ deploy:
         repository: advincze/ecswh
         registry: https://registry.hub.docker.com
 
-    aws-ecs:
     - tonnu/aws-ecs:
         key: $AWS_ACCESS_KEY
         secret: $AWS_SECRET_KEY
