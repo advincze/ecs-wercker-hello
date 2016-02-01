@@ -63,11 +63,11 @@ deploy:
 
     aws-ecs:
     - tonnu/aws-ecs:
-      key: $AWS_ACCESS_KEY
-      secret: $AWS_SECRET_KEY
-      region: eu-west-1
-      service-name: foobar
-      cluster-name: uptown
-      task-definition-name: ecswh
-      task-definition-file: taskdef.json
-      minimum-running-tasks: 1
+        key: $AWS_ACCESS_KEY
+        secret: $AWS_SECRET_KEY
+        region: eu-west-1
+        service-name: foobar
+        cluster-name: uptown
+        task-definition-name: ecswh
+        task-definition-file: taskdef.json
+        minimum-running-tasks: 1
