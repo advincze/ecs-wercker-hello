@@ -44,10 +44,8 @@ build:
     # Copy binary to a location that gets passed along to the deploy pipeline
     - script:
         name: copy binary
-        code: cp app "$WERCKER_OUTPUT_DIR"
-    - script:
-        name: copy binary
-        code: cp app "$WERCKER_OUTPUT_DIR"
+        code: cp app taskdef.json "$WERCKER_OUTPUT_DIR"
+
 deploy:
     box: python:2.7-slim
     dockerhub:
