@@ -47,7 +47,6 @@ build:
         code: cp app taskdef.json service.json "$WERCKER_OUTPUT_DIR"
 
 deploy:
-    box: python:2.7-slim
     dockerhub-ecs:
      # Use the scratch step to build a container from scratch based on the files present
     - internal/docker-scratch-push:
@@ -58,8 +57,7 @@ deploy:
         ports: "8080"
         repository: advincze/ecswh
         registry: https://registry.hub.docker.com
-
-    - tonnu/aws-ecs:
+    - advincze/ecs:
         key: $AWS_ACCESS_KEY
         secret: $AWS_SECRET_KEY
         region: eu-west-1
@@ -67,4 +65,4 @@ deploy:
         cluster-name: uptown
         task-definition-name: ecswh
         task-definition-file: service.json
-        minimum-running-tasks: 1
+        desired-running-tasks: 1
